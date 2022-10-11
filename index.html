@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <meta charset="utf-8" />
+    </head>
+
+    <script>
+        async function fetchRandomArchillectPost() {
+            let url = "https://archillect.mhsattarian.workers.dev/api/last"
+            let wrappedUrl = `https://api.allorigins.win/get?url=${url}`
+            let response = await fetch(wrappedUrl);
+            let data = await response.json();
+            let contents = JSON.parse(data.contents);
+            let lastID = contents.lastID
+            let randomID = Math.floor(Math.random() * lastID) + 1
+            let randomUrl = `https://archillect.com/${randomID}`
+            return randomUrl
+        }
+        
+        fetchRandomArchillectPost().then(v => window.location.replace(v))
+
+    </script>
+
+</html>
